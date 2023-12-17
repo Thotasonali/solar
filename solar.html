@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar System Animation</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #sun {
+      width: 100px;
+      height: 100px;
+      background-color: #ffdb58;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -50px;
+      margin-top: -50px;
+    }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      background-color: #4682b4;
+    }
+
+    #mercury { width: 20px; height: 20px; }
+    #venus { width: 30px; height: 30px; }
+    #earth { width: 40px; height: 40px; }
+    #mars { width: 25px; height: 25px; }
+  </style>
+</head>
+<body>
+  <div id="sun"></div>
+  <div id="mercury" class="planet"></div>
+  <div id="venus" class="planet"></div>
+  <div id="earth" class="planet"></div>
+  <div id="mars" class="planet"></div>
+
+  <script>
+    const planets = ['mercury', 'venus', 'earth', 'mars'];
+    const distances = [50, 100, 150, 200]; // Distance from the sun in pixels
+    const speeds = [2, 1.5, 1, 0.75]; // Rotation speed
+
+    function animate() {
+      for (let i = 0; i < planets.length; i++) {
+        const planet = document.getElementById(planets[i]);
+        const angle = Date.now() * speeds[i] / 1000;
+        const x = Math.cos(angle) * distances[i];
+        const y = Math.sin(angle) * distances[i];
+
+        planet.style.left = `${50 + x}px`;
+        planet.style.top = `${50 + y}px`;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
